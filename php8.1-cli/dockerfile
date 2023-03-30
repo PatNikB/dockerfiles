@@ -13,3 +13,15 @@ RUN apk update \
     curl \
     wget \
     unzip \
+    xml
+
+RUN apk add --no-cache --virtual .build-deps 
+
+# Install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Add xdebug
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+
